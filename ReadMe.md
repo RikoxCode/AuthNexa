@@ -1,5 +1,5 @@
 # MetaLink API
-![MetaLink Logo](https://github.com/RikoxCode/jmr_archive_api/assets/111433435/b8c04f9b-872d-447d-8556-3d462665b3a2)
+![AuthNexa logo](https://github.com/RikoxCode/AuthNexa/assets/111433435/c2b4752e-3b70-4b97-9c23-11ae9d763d7c)
 
 ## Description
 
