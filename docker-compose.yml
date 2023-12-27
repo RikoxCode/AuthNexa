@@ -1,0 +1,20 @@
+version: '1.0'
+services:
+  node:
+    image: "node:latest"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./api:/home/node/app
+    expose:
+      - "5436"
+    ports:
+      - "5436:5436"
+    command: "npm run start:docker"
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
