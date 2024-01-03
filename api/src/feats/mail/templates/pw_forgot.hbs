@@ -1,0 +1,36 @@
+<html lang='de'>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Passwortrücksetzung für {{site_name}} erforderlich</title>
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin:
+      0; padding: 20px; } .container { max-width: 600px; margin: auto;
+      background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0
+      10px rgba(0, 0, 0, 0.1); } .button { display: inline-block; padding: 10px
+      20px; background-color: #007bff; color: #fff; text-decoration: none;
+      border-radius: 5px; } .expiration-info { color: red; }
+    </style>
+  </head>
+  <body>
+
+    <div class='container'>
+      <h2>Hallo {{user.username}},</h2>
+      <p>Wir haben bemerkt, dass du eine Passwortrücksetzung für dein
+        JmrService-Konto angefordert hast. Um den Vorgang abzuschließen, klicke
+        bitte auf den folgenden Button:</p>
+      <p><a
+          href='{{url}}'
+          class='button'
+        >Passwort zurücksetzen</a></p>
+      <p>Bitte beachte, dass der obige Link in
+        <span class='expiration-info'>{{expiration_time}} Minuten</span>
+        seine Gültigkeit verliert.</p>
+      <p>Bei Fragen oder Problemen stehen wir dir gerne zur Verfügung.</p>
+      <p>Beste Grüße,</p>
+      <p>Dein JmrService-Team</p>
+      <p>Falls du die Anforderung nicht initiert hast, kannst du diese E-Mail
+        einfach ignorieren.</p>
+    </div>
+
+  </body>
+</html>
