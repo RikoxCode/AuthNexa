@@ -77,4 +77,17 @@ export class AuthController {
   async getProfile(@Body() user: any) {
     return await this.authService.getProfile(user);
   }
+
+  @Post('checklogin')
+  @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Check if User is logged in' })
+  @ApiParam({ name: 'User', type: LoginSwaggerModel })
+  @ApiResponse({ status: 200, description: 'Return User' })
+  async checkLogin(@Body() user: any) {
+    return {
+      message: 'User is logged in',
+      status: 200,
+      user: user,
+    };
+  }
 }

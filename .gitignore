@@ -5,6 +5,9 @@
 # env files
 .env
 
+# mongoDB data
+/data
+
 # Logs
 logs
 *.log

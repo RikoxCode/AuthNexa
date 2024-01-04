@@ -8,13 +8,7 @@ services:
     volumes:
       - ./api:/home/node/app
     expose:
-      - "5436"
-    ports:
-      - "5436:5436"
-    command: "npm run start:docker"
-  mongodb:
-    image: mongo
+      - "27017"
     ports:
       - "27017:27017"
-    volumes:
-      - ./data:/data/db
+    command: "npm run start:prod"
