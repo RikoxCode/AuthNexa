@@ -1,8 +1,11 @@
 import {
   Body,
   Controller,
+  Header,
+  Headers,
   InternalServerErrorException,
   Post,
+  Req,
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -66,7 +69,35 @@ export class AuthController {
   @ApiParam({ name: 'User', type: CreateSwaggerModel })
   @ApiResponse({ status: 200, description: 'Return accesstoken' })
   async register(@Body() user: any) {
-    return await this.authService.register(user);
+    try {
+      BaseFunctions._log(
+        'User ' + user.username + ' logged in',
+        '200',
+        'POST',
+        '/api/auth/login',
+      );
+      return await this.authService.register(user);
+    } catch (error) {
+      if (error.status !== 401) {
+        BaseFunctions._log(
+          'Something went wrong with register User ' + user.username,
+          '500',
+          'POST',
+          '/api/auth/login',
+        );
+
+        return new InternalServerErrorException('Something went wrong');
+      }
+
+      BaseFunctions._log(
+        'User ' + user.username + ' failed to log in',
+        '401',
+        'POST',
+        '/api/auth/login',
+      );
+
+      return error;
+    }
   }
 
   @Post('profile')
@@ -74,8 +105,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Search the User and respond with the Userprofile' })
   @ApiParam({ name: 'User', type: LoginSwaggerModel })
   @ApiResponse({ status: 200, description: 'Return User' })
-  async getProfile(@Body() user: any) {
-    return await this.authService.getProfile(user);
+  async getProfile(@Headers('Authorization') req: any) {
+    return await this.authService.getProfile(req);
   }
 
   @Post('checklogin')
@@ -83,7 +114,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Check if User is logged in' })
   @ApiParam({ name: 'User', type: LoginSwaggerModel })
   @ApiResponse({ status: 200, description: 'Return User' })
-  async checkLogin(@Body() user: any) {
+  async checkLogin(@Headers('Authorization') req: any) {
+    const user = await this.authService.getProfile(req);
     return {
       message: 'User is logged in',
       status: 200,
