@@ -7,7 +7,11 @@ export class User {
     @Prop()
     username: string;
 
-    @Prop({ unique: [true, 'Email already set'] })
+    @Prop({     
+        required: true,
+        unique: true,
+        type: String, 
+    })
     email: string;
 
     @Prop()
