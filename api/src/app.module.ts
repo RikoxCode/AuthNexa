@@ -13,7 +13,9 @@ import { AuthModule } from './feats/auth/auth.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot(process.env.MONGO_URI, {
+      autoIndex: true,
+    }),
     MailModule,
     UsersModule,
     AuthModule
