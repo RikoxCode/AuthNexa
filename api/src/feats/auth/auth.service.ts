@@ -1,8 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { IsArray, isArray } from 'class-validator';
-import { JwtConstants } from './auth.constants';
 
 @Injectable()
 export class AuthService {
@@ -41,7 +39,7 @@ export class AuthService {
     const payload = { username: user.username, sub: user._id };
     return {
       access_token: await this.jwtService.signAsync(payload, {
-        secret: JwtConstants.secret,
+        secret: process.env.JWT_SECRET,
       }),
       user,
     };
