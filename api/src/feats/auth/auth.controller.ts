@@ -3,7 +3,8 @@ import {
   Controller,
   Headers,
   InternalServerErrorException,
-  Post
+  Post,
+  UnauthorizedException
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/local.guard';
@@ -74,6 +75,17 @@ export class AuthController {
       );
       return await this.authService.register(user);
     } catch (error) {
+
+      if(error._message === 'User validation failed'){
+        BaseFunctions._log(
+          'Email ' + user.email + ' already exists in DB',
+          '401',
+          'POST',
+          '/api/auth/login',
+        );
+        return new UnauthorizedException('Email already exists');
+      }
+
       if (error.status !== 401) {
         BaseFunctions._log(
           'Something went wrong with register User ' + user.username,
@@ -82,7 +94,7 @@ export class AuthController {
           '/api/auth/login',
         );
 
-        return new InternalServerErrorException('Something went wrong');
+        return new InternalServerErrorException(error);
       }
 
       BaseFunctions._log(
@@ -105,8 +117,10 @@ export class AuthController {
 
     const user = await this.authService.getProfile(req);
 
+    console.log(user)
+
     BaseFunctions._log(
-      'User ' + user.username + ' requested his profile',
+      'User ' + user._doc.username + ' requested his profile',
       '200',
       'POST',
       '/api/auth/profile',

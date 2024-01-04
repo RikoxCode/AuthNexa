@@ -33,11 +33,12 @@ export class AuthService {
   }
 
   async validateUserById(userId: string) {
-    const user = await this.userService.findOneById(userId);
+    const user: any = await this.userService.findOneById(userId);
 
     if (user) {
-      const { password, ...result } = user;
-      return result;
+      const { password, ...result } = user._doc;
+      user._doc = result;
+      return user;
     }
 
     throw new UnauthorizedException('Invalid user');
@@ -87,7 +88,11 @@ export class AuthService {
       return user;
     } catch (error) {
       console.log(error)
-      throw new Error('Invalid token or user not found');
+      if(error.status !== 401){
+        throw new Error('Something went wrong');
+      }
+
+      throw new UnauthorizedException('Invalid token');
     }
   }
 }

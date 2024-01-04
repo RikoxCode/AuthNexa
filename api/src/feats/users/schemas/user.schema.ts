@@ -7,10 +7,17 @@ export class User {
     @Prop()
     username: string;
 
-    @Prop({     
-        required: true,
-        unique: true,
-        type: String, 
+    @Prop({ 
+        required: true, 
+        unique: true, 
+        validate: {
+            validator: async function(email: string) {
+                const user = await this.constructor.findOne({ email });
+                return !user;
+            },
+            message: 'Email already exists'
+        },
+        type: String 
     })
     email: string;
 
