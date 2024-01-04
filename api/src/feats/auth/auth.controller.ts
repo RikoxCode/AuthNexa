@@ -1,12 +1,9 @@
 import {
   Body,
   Controller,
-  Header,
   Headers,
   InternalServerErrorException,
-  Post,
-  Req,
-  UnauthorizedException,
+  Post
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/local.guard';
@@ -15,7 +12,6 @@ import {
   ApiTags,
   ApiResponse,
   ApiParam,
-  ApiBody,
   ApiOperation,
 } from '@nestjs/swagger';
 import CreateSwaggerModel from '../users/swagger/create.swagger_model';
@@ -106,6 +102,14 @@ export class AuthController {
   @ApiParam({ name: 'User', type: LoginSwaggerModel })
   @ApiResponse({ status: 200, description: 'Return User' })
   async getProfile(@Headers('Authorization') req: any) {
+
+    BaseFunctions._log(
+      'User ' + req.user.username + ' requested his profile',
+      '200',
+      'POST',
+      '/api/auth/profile',
+    );
+    
     return await this.authService.getProfile(req);
   }
 
@@ -116,6 +120,14 @@ export class AuthController {
   @ApiResponse({ status: 200, description: 'Return User' })
   async checkLogin(@Headers('Authorization') req: any) {
     const user = await this.authService.getProfile(req);
+
+    BaseFunctions._log(
+      'User ' + user.username + ' checked if he is logged in',
+      '200',
+      'POST',
+      '/api/auth/checklogin',
+    );
+
     return {
       message: 'User is logged in',
       status: 200,

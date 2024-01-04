@@ -44,8 +44,6 @@ export class AuthService {
   }
 
   async extractUserFromToken(header: any) {
-    console.log(header);
-    console.log(header.split(' ')[0]);
     if (header.split(' ')[0] !== 'Bearer') {
       throw new UnauthorizedException('Invalid token');
     }
@@ -77,15 +75,12 @@ export class AuthService {
 
   async getProfile(req: Request) {
     const authorizationHeader = req;
-    console.log(authorizationHeader)
 
     if (!authorizationHeader) {
       throw new Error('Authorization header is missing');
     }
 
     const token = await this.extractUserFromToken(authorizationHeader);
-
-    console.log(token)
 
     try {
       const user = await this.validateUserById(token.sub);

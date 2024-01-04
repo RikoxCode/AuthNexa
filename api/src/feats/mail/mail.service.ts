@@ -12,7 +12,7 @@ export class MailService {
 
     BaseFunctions._log('Email was sendet to ' + user.email, '200', 'POST', '/api/mail/pw-forgot-send:token');
 
-    await this.mailerService.sendMail({
+    this.mailerService.sendMail({
       to: user.email,
       subject: 'Password reset',
       template: './pw_forgot',
