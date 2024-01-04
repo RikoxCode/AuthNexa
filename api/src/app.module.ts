@@ -4,9 +4,6 @@ import { AppService } from './app.service';
 import { MailModule } from './feats/mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtService } from '@nestjs/jwt';
-import { UsersController } from './feats/users/users.controller';
-import { UsersService } from './feats/users/users.service';
 import { UsersModule } from './feats/users/users.module';
 import { AuthModule } from './feats/auth/auth.module';
 

@@ -8,7 +8,7 @@ export class MailService {
   constructor(private mailerService: MailerService) {}
 
   async pwForgotSender(user: User, token: string) {
-    const url = `https://localhost:4200/pw-reset/${token}`;
+    const url = `http://localhost:4200/pw-reset/${token}`;
 
     BaseFunctions._log('Email was sendet to ' + user.email, '200', 'POST', '/api/mail/pw-forgot-send:token');
 
