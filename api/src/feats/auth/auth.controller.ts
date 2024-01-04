@@ -103,14 +103,16 @@ export class AuthController {
   @ApiResponse({ status: 200, description: 'Return User' })
   async getProfile(@Headers('Authorization') req: any) {
 
+    const user = await this.authService.getProfile(req);
+
     BaseFunctions._log(
-      'User ' + req.user.username + ' requested his profile',
+      'User ' + user.username + ' requested his profile',
       '200',
       'POST',
       '/api/auth/profile',
     );
     
-    return await this.authService.getProfile(req);
+    return user;
   }
 
   @Post('checklogin')
