@@ -87,7 +87,6 @@ export class AuthService {
       const user = await this.validateUserById(token.sub);
       return user;
     } catch (error) {
-      console.log(error)
       if(error.status !== 401){
         throw new Error('Something went wrong');
       }
