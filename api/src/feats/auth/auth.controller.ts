@@ -117,8 +117,6 @@ export class AuthController {
 
     const user = await this.authService.getProfile(req);
 
-    console.log(user)
-
     BaseFunctions._log(
       'User ' + user._doc.username + ' requested his profile',
       '200',
