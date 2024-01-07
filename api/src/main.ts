@@ -12,7 +12,7 @@ async function bootstrap() {
       'AuthNexa is a simple authentication API that allows you to register, login, and reset your password. It contains a user management system and a mail service. On top of that, it is built with NestJS, MongoDB, and Swagger.',
     )
     .setVersion('1.0')
-    .addServer('http://localhost:3000/', 'Local environment')
+    .addServer('http://10.2.2.11:4000/', 'Local environment')
     .addServer('https://authnexa.netshlife.dev/', 'Production')
     .addTag('AuthNexa API')
     .build();

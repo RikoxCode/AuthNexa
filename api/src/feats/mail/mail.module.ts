@@ -5,9 +5,13 @@ import { MailService } from './mail.service';
 import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
 import { MailController } from './mail.controller';
+import { UsersService } from '../users/users.service';
+import { UserSchema } from '../users/schemas/user.schema';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     MailerModule.forRootAsync({
       // imports: [ConfigModule], // import module if not enabled globally
       useFactory: async (config: ConfigService) => ({
@@ -35,7 +39,7 @@ import { MailController } from './mail.controller';
       inject: [ConfigService],
     }),
   ],
-  providers: [MailService],
+  providers: [MailService, UsersService],
   controllers: [MailController]
 })
 export class MailModule {}

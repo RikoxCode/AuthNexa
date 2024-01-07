@@ -12,7 +12,7 @@ export class AppService {
     </head>
     <body>
         <script>
-        window.location.href = "http://localhost:3000/api/docs";
+        window.location.href = "/api/docs";
         </script>
     </body>
     </html>`;
