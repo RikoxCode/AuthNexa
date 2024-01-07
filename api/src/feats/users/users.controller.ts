@@ -53,6 +53,7 @@ export class UsersController {
   }
 
   @Get(':username/username')
+  @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Get user by username' })
   @ApiParam({ name: 'username', type: String })
   @ApiResponse({ status: 200, description: 'Return user.' })
@@ -108,6 +109,7 @@ export class UsersController {
   }
 
   @Delete('delete/:id')
+  @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Delete user' })
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, description: 'Return user.' })
