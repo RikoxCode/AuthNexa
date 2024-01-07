@@ -33,4 +33,17 @@ export class MailController {
   async sendPWForgot(@Body() body: User, @Param('token') token: string) {
     await this.mailService.pwForgotSender(body, token);
   }
+
+  @Post('test-mail/:email')
+  @ApiBody({ type:  CreateSwaggerModel})
+  @ApiResponse({
+    status: 200,
+    description: 'Send a Mail with a pw-forgot link',
+    isArray: false,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  @ApiParam({ name: 'email', format: 'email', type: 'string' })
+  async sendTestMail(@Param('email') email: string) {
+    await this.mailService.sendTestMail(email);
+  }
 }
