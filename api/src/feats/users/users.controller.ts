@@ -38,6 +38,7 @@ export class UsersController {
   }
 
   @Get(':id/id')
+  @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Get user by id' })
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, description: 'Return user.' })
