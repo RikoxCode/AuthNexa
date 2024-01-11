@@ -28,6 +28,12 @@ import { AuthGuard } from '../auth/guards/local.guard';
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
+  /**
+   * This function returns all users
+   * @description Its a GET request
+   * @description AuthGuard is used to protect the route
+   * @returns all users
+   */
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Return all users.' })
@@ -37,12 +43,20 @@ export class UsersController {
     return await this.userService.findAll();
   }
 
+  /**
+   * This function returns a single user by ID
+   * @description Its a GET request
+   * @description AuthGuard is used to protect the route
+   * @param id
+   * @returns
+   */
   @Get(':id/id')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Get user by id' })
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, description: 'Return user.' })
   async findOneById(@Param('id') id: string) {
+    // Log the request
     BaseFunctions._log(
       'User with id: ' + id + ' found',
       '200',
@@ -50,15 +64,24 @@ export class UsersController {
       '/api/users/:id/id',
     );
 
+    // Return the user
     return await this.userService.findOneById(id);
   }
 
+  /**
+   * This function returns a single user by username
+   * @description Its a GET request
+   * @description AuthGuard is used to protect the route
+   * @param username
+   * @returns
+   */
   @Get(':username/username')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Get user by username' })
   @ApiParam({ name: 'username', type: String })
   @ApiResponse({ status: 200, description: 'Return user.' })
   async findOneByUsername(@Param('username') username: string) {
+    // Log the request
     BaseFunctions._log(
       'User with username: ' + username + ' found',
       '200',
@@ -66,16 +89,26 @@ export class UsersController {
       '/api/users/:username/username',
     );
 
+    // Return the user
     return await this.userService.findOneByUsername(username);
   }
 
+  /**
+   * This function creates a new user
+   * @description Its a POST request
+   * @description AuthGuard is used to protect the route
+   * @param user
+   * @returns
+   */
   @Post('create')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Create user' })
   @ApiBody({ type: CreateSwaggerModel })
   @ApiResponse({ status: 200, description: 'Return user.' })
   async create(@Body() user: User) {
+    // try to create the user
     try {
+      // log the request if it was successful
       BaseFunctions._log(
         'User with username: ' + user.username + ' created',
         '200',
@@ -83,6 +116,7 @@ export class UsersController {
         '/api/auth/create',
       );
 
+      // return the created user
       return await this.userService.create(user);
     } catch (error) {
       if (error.code === 11000) {
@@ -109,6 +143,13 @@ export class UsersController {
     }
   }
 
+  /**
+   * This function deletes a user by ID
+   * Its a DELETE request
+   * AuthGuard is used to protect the route
+   * @param id
+   * @returns
+   */
   @Delete('delete/:id')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Delete user' })
@@ -147,6 +188,14 @@ export class UsersController {
     }
   }
 
+  /**
+   * This function updates a user by ID
+   * Its a PUT request
+   * AuthGuard is used to protect the route
+   * @param id
+   * @param user
+   * @returns
+   */
   @Put('edit/:id')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Edit user' })

@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
+  /**
+   * This is the default rout for the API and responds with a redirect to the API docs
+   * @returns string: HTML
+   */
   getIndexFile() {
     return `<!DOCTYPE html>
     <html lang="en">

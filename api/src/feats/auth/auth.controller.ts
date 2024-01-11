@@ -4,17 +4,12 @@ import {
   Headers,
   InternalServerErrorException,
   Post,
-  UnauthorizedException
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/local.guard';
 import { UseGuards } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiResponse,
-  ApiParam,
-  ApiOperation,
-} from '@nestjs/swagger';
+import { ApiTags, ApiResponse, ApiParam, ApiOperation } from '@nestjs/swagger';
 import CreateSwaggerModel from '../users/swagger/create.swagger_model';
 import LoginSwaggerModel from './swagger/login.swagger_model';
 import BaseFunctions from 'src/core/base-functions';
@@ -24,6 +19,12 @@ import BaseFunctions from 'src/core/base-functions';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  /**
+   * This function is used to login the user
+   * @description Its a POST request
+   * @param user
+   * @returns
+   */
   @Post('login')
   @ApiOperation({ summary: 'Login User into the API' })
   @ApiParam({ name: 'User', type: LoginSwaggerModel })
@@ -61,6 +62,11 @@ export class AuthController {
     }
   }
 
+  /**
+   * This function is used to register the user
+   * @description Its a POST request
+   * @returns
+   */
   @Post('register')
   @ApiOperation({ summary: 'Create a User and Login User into the API' })
   @ApiParam({ name: 'User', type: CreateSwaggerModel })
@@ -75,8 +81,7 @@ export class AuthController {
       );
       return await this.authService.register(user);
     } catch (error) {
-
-      if(error._message === 'User validation failed'){
+      if (error._message === 'User validation failed') {
         BaseFunctions._log(
           'Email ' + user.email + ' already exists in DB',
           '401',
@@ -108,13 +113,19 @@ export class AuthController {
     }
   }
 
+  /**
+   * This function is used to get the profile of the user
+   * @description Its a POST request
+   * @description AuthGuard is used to protect the route
+   * @param req
+   * @returns
+   */
   @Post('profile')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Search the User and respond with the Userprofile' })
   @ApiParam({ name: 'User', type: LoginSwaggerModel })
   @ApiResponse({ status: 200, description: 'Return User' })
   async getProfile(@Headers('Authorization') req: any) {
-
     const user = await this.authService.getProfile(req);
 
     BaseFunctions._log(
@@ -123,10 +134,17 @@ export class AuthController {
       'POST',
       '/api/auth/profile',
     );
-    
+
     return user;
   }
 
+  /**
+   * This function is used to check if the user is logged in
+   * @description Its a POST request
+   * @description AuthGuard is used to protect the route
+   * @param req
+   * @returns
+   */
   @Post('checklogin')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Check if User is logged in' })

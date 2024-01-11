@@ -11,11 +11,23 @@ export class MailService {
     private userService: UsersService,
   ) {}
 
+  /**
+   * This function sends a mail to the given email
+   * Is used to send a mail if the user forgot his password
+   * @param email
+   */
   async pwForgotSender(user: User, token: string) {
     const url = `http://localhost:4200/pw-reset/${token}`;
 
-    BaseFunctions._log('Email was sendet to ' + user.email, '200', 'POST', '/api/mail/pw-forgot-send:token');
+    // Log the request
+    BaseFunctions._log(
+      'Email was sendet to ' + user.email,
+      '200',
+      'POST',
+      '/api/mail/pw-forgot-send:token',
+    );
 
+    // Send the mail
     this.mailerService.sendMail({
       to: user.email,
       subject: 'Password reset',
@@ -24,17 +36,28 @@ export class MailService {
         user: user,
         url,
         site_name: 'JmrService',
-        expiration_time: '15 minutes'
+        expiration_time: '15 minutes',
       },
     });
   }
 
-
+  /**
+   * This function sends a test mail to the given email
+   * Is used to test the mailer module
+   * @param email
+   */
   async sendTestMail(email: string) {
     const url = `http://localhost:4200/testing-mail/${email}`;
 
-    BaseFunctions._log('Email was sendet to ' + email, '200', 'POST', '/api/mail/pw-forgot-send:token');
+    // Log the request
+    BaseFunctions._log(
+      'Email was sendet to ' + email,
+      '200',
+      'POST',
+      '/api/mail/pw-forgot-send:token',
+    );
 
+    // Send the mail
     this.mailerService.sendMail({
       to: '',
       subject: 'Testing Nest MailerModule ✔',

@@ -4,12 +4,16 @@ import { ApiTags, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import CreateSwaggerModel from '../users/swagger/create.swagger_model';
 import { User } from '../users/schemas/user.schema';
 
-
 @Controller('api/mail')
 @ApiTags('MailService')
 export class MailController {
   constructor(private readonly mailService: MailService) {}
 
+  /**
+   * This function returns a string
+   * @description Its a GET request
+   * @returns
+   */
   @Get()
   @ApiResponse({
     status: 200,
@@ -21,8 +25,14 @@ export class MailController {
     return 'Trust me, I am a MailService!';
   }
 
+  /**
+   * This function sends a mail to the given email
+   * @description Its a POST request
+   * @param body
+   * @param token
+   */
   @Post('pw-forgot-send/:token')
-  @ApiBody({ type:  CreateSwaggerModel})
+  @ApiBody({ type: CreateSwaggerModel })
   @ApiResponse({
     status: 200,
     description: 'Send a Mail with a pw-forgot link',
@@ -34,8 +44,13 @@ export class MailController {
     await this.mailService.pwForgotSender(body, token);
   }
 
+  /**
+   * This function sends a mail to the given email
+   * @description Its a POST request
+   * @param email
+   */
   @Post('test-mail/:email')
-  @ApiBody({ type:  CreateSwaggerModel})
+  @ApiBody({ type: CreateSwaggerModel })
   @ApiResponse({
     status: 200,
     description: 'Send a Mail with a pw-forgot link',
