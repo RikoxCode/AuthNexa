@@ -21,7 +21,8 @@ Um die AuthNexa API in einer Anwendung zu verwenden, können Sie HTTP-Anfragen a
 ## .env creation
 
 Create a file with the name **.env** and fill this information in there.
-*Note*: Check if the file is in the right directory! ***~/api/.env***
+
+*Note*: Check if the file is in the right directory like ***~/api/.env***!
 ```.env
 JWT_SECRET="<YOUR_SECRET>"
 JWT_EXPIRATION_TIME="<YOUR_EXPIRATION_TIME>"
