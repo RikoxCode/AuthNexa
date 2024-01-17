@@ -24,9 +24,11 @@ Create a file with the name **.env** and fill this information in there.
 
 *Note*: Check if the file is in the right directory like ***~/api/.env***!
 ```.env
+# JWT configuration
 JWT_SECRET="<YOUR_SECRET>"
 JWT_EXPIRATION_TIME="<YOUR_EXPIRATION_TIME>"
 
+# MongoDB connection string (for mongoose)
 MONGO_URI="<YOUR_MONGODB_CONNECTION>"
 
 # mail
@@ -35,7 +37,6 @@ MAIL_USER=<YOUR_MAIL_USER>
 MAIL_PASSWORD=<YOUR_MAIL_PASSWORD>
 MAIL_FROM=<YOUR_MAIL_FROM>
 
-# optional
 MAIL_TRANSPORT=smtp://${MAIL_USER}:${MAIL_PASSWORD}@${MAIL_HOST}
 ```
 
