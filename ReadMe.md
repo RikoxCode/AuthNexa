@@ -1,35 +1,35 @@
 # AuthNexa API
 ![AuthNexa logo](https://github.com/RikoxCode/AuthNexa/assets/111433435/c2b4752e-3b70-4b97-9c23-11ae9d763d7c)
 
-Die AuthNexa API ermöglicht Authentifizierung und Autorisierung mittels JSON Web Tokens (JWT). Die gesamte API ist als NestAPI implementiert und besteht aus den folgenden Komponenten:
+The AuthNexa API enables authentication and authorization using JSON Web Tokens (JWT). The entire API is implemented as a NestAPI and consists of the following components:
 
 ## AuthService
-Der AuthService ist für die Authentifizierung von Benutzern zuständig. Er generiert und validiert JWTs, um sicherzustellen, dass nur autorisierte Benutzer auf bestimmte Ressourcen zugreifen können.
+The AuthService is responsible for authenticating users. It generates and validates JWTs to ensure that only authorized users can access specific resources.
 
 ## UserService
-Der UserService verwaltet Benutzerinformationen und bietet Funktionen wie Benutzerregistrierung, Profilverwaltung und -aktualisierung.
+The UserService manages user information and provides functionalities such as user registration, profile management, and updates.
 
 ## MailService
-Der MailService kümmert sich um die Kommunikation per E-Mail im Zusammenhang mit der Benutzerauthentifizierung. Dies kann die Zustellung von Bestätigungsmails, Passwortrücksetzungslinks und Ähnlichem umfassen.
+The MailService handles email communication related to user authentication. This may include the delivery of confirmation emails, password reset links, and similar actions.
 
-**Hinweis:** Alle Anfragen an diese API müssen mit "/api/" beginnen und sind ausschließlich über das Internet zugänglich. Die API ist als localhost-API verfügbar.
+**Note:** All requests to this API must start with "/api/" and are accessible only over the internet. The API is available as a localhost API.
 
-## Beispielanwendung
+## Sample Application
 Um die AuthNexa API in einer Anwendung zu verwenden, können Sie HTTP-Anfragen an die entsprechenden Endpunkte senden, um Benutzer zu authentifizieren, Benutzerinformationen zu verwalten und E-Mail-bezogene Aktionen auszulösen.
 
-**Beispielcode:**
+**Sample Requests:**
 ```bash
-# Beispiel: Benutzer authentifizieren
-curl -X POST http://localhost:3000/api/auth -d '{"username": "Benutzername", "password": "Passwort"}'
+# Sample: User authentification
+curl -X POST http://localhost:4000/api/auth/login -d '{"username": "OldUser", "password": "Password01243"}'
 
-# Beispiel: Benutzer registrieren
-curl -X POST http://localhost:3000/api/users -d '{"username": "NeuerBenutzer", "password": "Passwort123", "email": "neuerbenutzer@example.com"}'
+# Sample: User registration
+curl -X POST http://localhost:4000/api/auth/register -d '{"username": "NewUser", "password": "Password123", "email": "newuser@example.com"}'
 
-# Beispiel: Benutzerprofil aktualisieren
-curl -X PUT http://localhost:3000/api/users/123 -d '{"profile": {"name": "Neuer Name", "email": "neue-email@example.com"}}'
+# Sample: Users list requesting
+curl -X GET http://localhost:4000/api/users
 
-# Beispiel: E-Mail für Passwortrücksetzung senden
-curl -X POST http://localhost:3000/api/reset-password -d '{"email": "benutzer@example.com"}'
+# Sample: E-Mail for Password reseting send
+curl -X POST http://localhost:4000/api/mail/pw-forgot-send/:token -d '{"username": "OldUser", "password": "Password01243", email:"olduser@example.com"}'
 ```
 
 ## Stay in touch
