@@ -1,53 +1,39 @@
-# MetaLink API
+# AuthNexa API
 ![AuthNexa logo](https://github.com/RikoxCode/AuthNexa/assets/111433435/c2b4752e-3b70-4b97-9c23-11ae9d763d7c)
 
-## Description
+Die AuthNexa API ermöglicht Authentifizierung und Autorisierung mittels JSON Web Tokens (JWT). Die gesamte API ist als NestAPI implementiert und besteht aus den folgenden Komponenten:
 
-### Framework
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## AuthService
+Der AuthService ist für die Authentifizierung von Benutzern zuständig. Er generiert und validiert JWTs, um sicherzustellen, dass nur autorisierte Benutzer auf bestimmte Ressourcen zugreifen können.
 
-### Project description
-Create a secure NestJS REST API for grade metadata management with MongoDB integration and authentication. Document the API using Swagger for easy interaction and testing capabilities.
+## UserService
+Der UserService verwaltet Benutzerinformationen und bietet Funktionen wie Benutzerregistrierung, Profilverwaltung und -aktualisierung.
 
-## Installation
+## MailService
+Der MailService kümmert sich um die Kommunikation per E-Mail im Zusammenhang mit der Benutzerauthentifizierung. Dies kann die Zustellung von Bestätigungsmails, Passwortrücksetzungslinks und Ähnlichem umfassen.
 
+**Hinweis:** Alle Anfragen an diese API müssen mit "/api/" beginnen und sind ausschließlich über das Internet zugänglich. Die API ist als localhost-API verfügbar.
+
+## Beispielanwendung
+Um die AuthNexa API in einer Anwendung zu verwenden, können Sie HTTP-Anfragen an die entsprechenden Endpunkte senden, um Benutzer zu authentifizieren, Benutzerinformationen zu verwalten und E-Mail-bezogene Aktionen auszulösen.
+
+**Beispielcode:**
 ```bash
-$ npm install
+# Beispiel: Benutzer authentifizieren
+curl -X POST http://localhost:3000/api/auth -d '{"username": "Benutzername", "password": "Passwort"}'
+
+# Beispiel: Benutzer registrieren
+curl -X POST http://localhost:3000/api/users -d '{"username": "NeuerBenutzer", "password": "Passwort123", "email": "neuerbenutzer@example.com"}'
+
+# Beispiel: Benutzerprofil aktualisieren
+curl -X PUT http://localhost:3000/api/users/123 -d '{"profile": {"name": "Neuer Name", "email": "neue-email@example.com"}}'
+
+# Beispiel: E-Mail für Passwortrücksetzung senden
+curl -X POST http://localhost:3000/api/reset-password -d '{"email": "benutzer@example.com"}'
 ```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
-
-- Author - [Levin Zimmermann](mailto:levinzimmermann06@gmail.com)
+Contact me under [my mail](mailto:support@netshlife.dev)
 
 ## License
 
