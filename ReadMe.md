@@ -17,6 +17,41 @@ The MailService handles email communication related to user authentication. This
 ## Sample Application
 Um die AuthNexa API in einer Anwendung zu verwenden, können Sie HTTP-Anfragen an die entsprechenden Endpunkte senden, um Benutzer zu authentifizieren, Benutzerinformationen zu verwalten und E-Mail-bezogene Aktionen auszulösen.
 
+
+## .env creation
+
+Create a file with the name **.env** and fill this information in there.
+*Note*: Check if the file is in the right directory! ***~/api/.env***
+```.env
+JWT_SECRET="<YOUR_SECRET>"
+JWT_EXPIRATION_TIME="<YOUR_EXPIRATION_TIME>"
+
+MONGO_URI="<YOUR_MONGODB_CONNECTION>"
+
+# mail
+MAIL_HOST=<YOUR_MAIL_HOST>
+MAIL_USER=<YOUR_MAIL_USER>
+MAIL_PASSWORD=<YOUR_MAIL_PASSWORD>
+MAIL_FROM=<YOUR_MAIL_FROM>
+
+# optional
+MAIL_TRANSPORT=smtp://${MAIL_USER}:${MAIL_PASSWORD}@${MAIL_HOST}
+```
+
+## Installation
+
+***Note***: You need to have docker installed on your pc!
+
+### Run the application in Linux
+```bash
+$ sudo docker-compose up
+```
+
+### Run the application in Windows
+```cmd
+docker-compose up
+```
+
 **Sample Requests:**
 ```bash
 # Sample: User authentification
