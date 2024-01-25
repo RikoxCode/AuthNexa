@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { User } from './schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
@@ -9,6 +10,24 @@ export class UsersService {
     @InjectModel('User')
     private userModel: mongoose.Model<User>,
   ) {}
+
+  /**
+   * This function returns a user without the password field
+   *
+   * @param user User | User[]
+   * @returns User | User[] without password
+   */
+  sanitizeUser(user: any) {
+    if (user instanceof Array) {
+      return user.map((user) => {
+        const { password, ...result } = user;
+        return result;
+      });
+    }
+
+    const { password, ...result } = user;
+    return result;
+  }
 
   /**
    * This function returns all users in the database

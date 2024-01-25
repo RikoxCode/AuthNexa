@@ -12,7 +12,7 @@ async function bootstrap() {
       'AuthNexa is a simple authentication API that allows you to register, login, and reset your password. It contains a user management system and a mail service. On top of that, it is built with NestJS, MongoDB, and Swagger.',
     )
     .setVersion('1.0')
-    .addServer('http://10.2.2.11:4000/', 'Local environment')
+    .addServer('http://10.2.2.16:4000/', 'VPN Local environment')
     .addServer('https://authnexa.netshlife.dev/', 'Production')
     .addTag('AuthNexa API')
     .build();
@@ -20,7 +20,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
 
   // Adjust the path to point to your favicon
-  const faviconPath = path.join(__dirname, 'assets', 'JmrService-removebg-preview.ico');
+  const faviconPath = path.join(
+    __dirname,
+    'assets',
+    'JmrService-removebg-preview.ico',
+  );
 
   SwaggerModule.setup('api/docs', app, document, {
     customfavIcon: faviconPath, // Updated favicon path

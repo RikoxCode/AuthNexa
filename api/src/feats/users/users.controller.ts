@@ -40,7 +40,7 @@ export class UsersController {
   async findAll() {
     BaseFunctions._log('All users found', '200', 'GET', '/api/users/');
 
-    return await this.userService.findAll();
+    return this.userService.sanitizeUser(await this.userService.findAll());
   }
 
   /**
@@ -65,7 +65,9 @@ export class UsersController {
     );
 
     // Return the user
-    return await this.userService.findOneById(id);
+    return this.userService.sanitizeUser(
+      await this.userService.findOneById(id),
+    );
   }
 
   /**
@@ -90,7 +92,9 @@ export class UsersController {
     );
 
     // Return the user
-    return await this.userService.findOneByUsername(username);
+    return this.userService.sanitizeUser(
+      await this.userService.findOneByUsername(username),
+    );
   }
 
   /**
@@ -117,7 +121,7 @@ export class UsersController {
       );
 
       // return the created user
-      return await this.userService.create(user);
+      return this.userService.sanitizeUser(await this.userService.create(user));
     } catch (error) {
       if (error.code === 11000) {
         BaseFunctions._log(
@@ -211,7 +215,9 @@ export class UsersController {
         '/api/auth/edit',
       );
 
-      return await this.userService.edit(id, user);
+      return this.userService.sanitizeUser(
+        await this.userService.edit(id, user),
+      );
     } catch (error) {
       if (id === undefined) {
         BaseFunctions._log(
