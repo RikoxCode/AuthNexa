@@ -15,7 +15,7 @@ The MailService handles email communication related to user authentication. This
 **Note:** All requests to this API must start with "/api/" and are accessible only over the internet. The API is available as a localhost API.
 
 ## Sample Application
-Um die AuthNexa API in einer Anwendung zu verwenden, können Sie HTTP-Anfragen an die entsprechenden Endpunkte senden, um Benutzer zu authentifizieren, Benutzerinformationen zu verwalten und E-Mail-bezogene Aktionen auszulösen.
+To use the AuthNexa API in an application, you can send HTTP requests to the appropriate endpoints to authenticate users, manage user information, and trigger email-related actions.
 
 
 ## .env creation
