@@ -19,10 +19,13 @@ export class UsersService {
    */
   sanitizeUser(user: any) {
     if (user instanceof Array) {
-      return user.map((user) => {
-        const { password, ...result } = user;
+
+      const users = user.map((user: any) => {
+        const { password, ...result } = user._doc;
         return result;
       });
+
+      return users
     }
 
     const { password, ...result } = user;

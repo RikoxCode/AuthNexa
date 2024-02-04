@@ -1,0 +1,26 @@
+<html lang='de'>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Passwortrücksetzung für {{site_name}} erforderlich</title>
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin:
+      0; padding: 20px; } .container { max-width: 600px; margin: auto;
+      background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0
+      10px rgba(0, 0, 0, 0.1); } .button { display: inline-block; padding: 10px
+      20px; background-color: #007bff; color: #fff; text-decoration: none;
+      border-radius: 5px; } .expiration-info { color: red; }
+    </style>
+  </head>
+  <body>
+
+    <div class='container'>
+      <h2>Hallo {{body.firstname}} {{body.lastname}},</h2>
+        <p>Wir haben deine Anfrage an {{site_name}} gesendet und werden uns drum kümmern dass deine Anfrage schnell bearbeitet wird.</p>
+
+        <p>Bei Fragen oder Problemen stehen wir dir gerne zur Verfügung.</p>
+        <p>Beste Grüße,</p>
+        <p>Dein {{ site_name }}-Team</p>
+    </div>
+
+  </body>
+</html>

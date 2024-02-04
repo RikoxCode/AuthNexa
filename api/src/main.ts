@@ -6,6 +6,8 @@ import * as path from 'path'; // Import path module
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
   const options = new DocumentBuilder()
     .setTitle('AuthNexa API')
     .setDescription(
@@ -33,8 +35,6 @@ async function bootstrap() {
       persistAuthorization: true, // Retain the token even after refreshing the Swagger UI web page
     },
   });
-
-  app.enableCors();
 
   await app.listen(process.env.PORT || 3000);
 }
