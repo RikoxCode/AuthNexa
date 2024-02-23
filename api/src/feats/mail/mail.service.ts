@@ -17,7 +17,7 @@ export class MailService {
    * @param email
    */
   async pwForgotSender(user: User, token: string) {
-    const url = `http://localhost:4200/pw-reset/${token}`;
+    const url = `http://jmrservice.netshlife.dev:4200/pw-reset/${token}`;
 
     // Log the request
     BaseFunctions._log(
